@@ -74,3 +74,4 @@ Also note that `GitRepoStep.zig` can be used to download any git repository, not
 * https://github.com/marler8997/ziget/blob/master/build.zig
 * https://github.com/marler8997/zigup/blob/master/build.zig
 * https://github.com/marler8997/windows-remote-control/blob/master/build.zig
+* https://github.com/marlersoft/zigwin32gen/blob/main/build.zig
