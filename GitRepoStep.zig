@@ -89,7 +89,7 @@ fn make(step: *std.build.Step) !void {
         if (!self.fetch_enabled) {
             std.debug.print("Error: git repository '{s}' does not exist\n", .{self.path});
             std.debug.print("       Use -Dfetch to download it automatically, or run the following to clone it:\n", .{});
-            std.debug.print("       git clone {s}{s}{s} {s} && git -C {3s} checkout {s} -b for_ziget\n",
+            std.debug.print("       git clone {s}{s}{s} {s} && git -C {3s} checkout {s} -b fordep\n",
                 .{self.url, branch_args[0], branch_args[1], self.path, self.sha});
             std.os.exit(1);
         }
