@@ -1,4 +1,4 @@
-//! Publish Date: 2023_03_19
+//! Publish Date: 2023_11_16
 //! This file is hosted at github.com/marler8997/zig-build-repos and is meant to be copied
 //! to projects that use it.
 const std = @import("std");
@@ -21,7 +21,7 @@ pub const ShaCheck = enum {
     }
 };
 
-step: std.build.Step,
+step: std.Build.Step,
 url: []const u8,
 name: []const u8,
 branch: ?[]const u8 = null,
@@ -45,18 +45,15 @@ pub fn create(b: *std.build.Builder, opt: struct {
     path: ?[]const u8 = null,
     sha_check: ShaCheck = .warn,
     fetch_enabled: ?bool = null,
-    first_ret_addr: ?usize = null,
 }) *GitRepoStep {
     var result = b.allocator.create(GitRepoStep) catch @panic("memory");
     const name = std.fs.path.basename(opt.url);
     result.* = GitRepoStep{
         .step = std.build.Step.init(.{
             .id = .custom,
-            .name = b.fmt("clone git repository '{s}'", .{name}),
+            .name = "clone a git repository",
             .owner = b,
             .makeFn = make,
-            .first_ret_addr = opt.first_ret_addr orelse @returnAddress(),
-            .max_rss = 0,
         }),
         .url = opt.url,
         .name = name,
@@ -81,7 +78,7 @@ fn hasDependency(step: *const std.build.Step, dep_candidate: *const std.build.St
     return false;
 }
 
-fn make(step: *std.Build.Step, prog_node: *std.Progress.Node) !void {
+fn make(step: *std.build.Step, prog_node: *std.Progress.Node) !void {
     _ = prog_node;
     const self = @fieldParentPtr(GitRepoStep, "step", step);
 
