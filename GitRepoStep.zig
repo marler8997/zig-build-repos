@@ -1,4 +1,4 @@
-//! Publish Date: 2023_11_16
+//! Publish Date: 2024_02_13
 //! This file is hosted at github.com/marler8997/zig-build-repos and is meant to be copied
 //! to projects that use it.
 const std = @import("std");
@@ -46,7 +46,7 @@ pub fn create(b: *std.build.Builder, opt: struct {
     sha_check: ShaCheck = .warn,
     fetch_enabled: ?bool = null,
 }) *GitRepoStep {
-    var result = b.allocator.create(GitRepoStep) catch @panic("memory");
+    const result = b.allocator.create(GitRepoStep) catch @panic("memory");
     const name = std.fs.path.basename(opt.url);
     result.* = GitRepoStep{
         .step = std.build.Step.init(.{
